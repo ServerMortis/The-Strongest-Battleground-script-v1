@@ -1,0 +1,220 @@
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Script activated! by ServerMortis", "All")
+--Бибилеотека
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+--Создание окна
+local Window = OrionLib:MakeWindow({Name = "The Strongest Battleground", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+--Создание таба
+
+local tabm = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--Создание секции
+local sectm = tabm:AddSection({
+	Name = "Main"
+})
+
+local taba = Window:MakeTab({
+	Name = "Animation",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--Создание секции
+local secta = taba:AddSection({
+	Name = "Animation"
+})
+
+local tabt = Window:MakeTab({
+	Name = "Teleport",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--Создание секции
+local sectt = tabt:AddSection({
+	Name = "Teleport"
+})
+
+--Создаёт кнопку
+tabm:AddButton({
+	Name = "Change Color Katana in blue for sonic",
+	Callback = function()
+        game.Players.LocalPlayer.Character:FindFirstChild("#NinjaKATANA").Blade.BrickColor = BrickColor.new("Teal")
+
+        game.Players.LocalPlayer.Character:FindFirstChild("#NinjaKATANA").Diamond.BrickColor = BrickColor.new("Toothpaste")
+        
+        game.Players.LocalPlayer.Character:FindFirstChild("#NinjaKATANA").Holder.BrickColor = BrickColor.new("Bright bluish green")
+        
+        game.Players.LocalPlayer.Character:FindFirstChild("#NinjaKATANA").Sheathe.BrickColor = BrickColor.new("Teal")
+        
+        game.Players.LocalPlayer.Character:FindFirstChild("#NinjaKATANA").Handle.BrickColor = BrickColor.new("Teal")
+        
+        game.Players.LocalPlayer.Character:FindFirstChild("#NinjaKATANA").Rope.BrickColor = BrickColor.new("Deep blue")
+        
+        game.Players.LocalPlayer.Character.Sheathed.Sheathe.BrickColor = BrickColor.new("Bright bluish green")	
+  	end    
+})
+
+taba:AddButton({
+	Name = "Change Animation for Bald Hero",
+	Callback = function()
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("You activate script for animation for bald hero", "All")
+        local function onAnimationPlayed(animationTrack)
+            local animationId = tonumber(animationTrack.Animation.AnimationId:match("%d+"))
+        
+            local animationReplacements = {
+                --скиллы
+                [10468665991] = "rbxassetid://12509505723",
+                [10466974800] = "rbxassetid://12534735382",
+                [10471336737] = "rbxassetid://13294790250",
+                [12510170988] = "rbxassetid://13556985475",
+                --Удары
+                [10469493270] = "rbxassetid://13370310513",
+                [10469630950] = "rbxassetid://13390230973",
+                [10469639222] = "rbxassetid://13378751717",
+                [10469639222] = "rbxassetid://13378708199",
+                --Деш
+                [10479335397] = "rbxassetid://13380255751",
+            }
+                
+            local replacementId = animationReplacements[animationId]
+            if replacementId then
+                for _, animTrack in pairs(game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()) do
+                    animTrack:Stop()
+                end
+                wait(0.1)
+                
+                local anim = Instance.new("Animation")
+                anim.AnimationId = replacementId
+                local newAnimTrack = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(anim)
+                newAnimTrack:Play()
+                
+                newAnimTrack:AdjustSpeed(0)
+                newAnimTrack.TimePosition = 0
+                newAnimTrack:AdjustSpeed(1)
+            end
+        end
+        
+        local humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+        humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+        
+        local function onBodyVelocityAdded(bodyVelocity)
+            if bodyVelocity:IsA("BodyVelocity") then
+                bodyVelocity.Velocity = Vector3.new(bodyVelocity.Velocity.X, 0, bodyVelocity.Velocity.Z)
+            end
+        end
+        
+        local character = game.Players.LocalPlayer.Character
+        for _, descendant in pairs(character:GetDescendants()) do
+            onBodyVelocityAdded(descendant)
+        end
+        
+        character.DescendantAdded:Connect(onBodyVelocityAdded)
+        
+        game.Players.LocalPlayer.CharacterAdded:Connect(function(newCharacter)
+            for _, descendant in pairs(newCharacter:GetDescendants()) do
+                onBodyVelocityAdded(descendant)
+            end
+            newCharacter.DescendantAdded:Connect(onBodyVelocityAdded)
+        end) 
+  	end    
+})
+
+taba:AddButton({
+	Name = "Change Animation for Hero Hunter",
+	Callback = function()
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("You activate script for animation for hero hunter", "All")
+        local function onAnimationPlayed(animationTrack)
+            local animationId = tonumber(animationTrack.Animation.AnimationId:match("%d+"))
+        
+            local animationReplacements = {
+                --скиллы
+                [12273188754] = "rbxassetid://14048285180",
+                [12296113986] = "rbxassetid://15295895753",
+                [12309835105] = "rbxassetid://14351441234",
+                [13603396939] = "rbxassetid://12534735382",
+                --Удары
+                [13532562418] = "rbxassetid://13491635433",
+                [13532600125] = "rbxassetid://13296577783",
+                [13532604085] = "rbxassetid://13295919399",
+                [13294471966] = "rbxassetid://13295936866",
+                --Деш
+                [10479335397] = "rbxassetid://13380255751",
+            }
+                
+            local replacementId = animationReplacements[animationId]
+            if replacementId then
+                for _, animTrack in pairs(game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()) do
+                    animTrack:Stop()
+                end
+                wait(0.1)
+                
+                local anim = Instance.new("Animation")
+                anim.AnimationId = replacementId
+                local newAnimTrack = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(anim)
+                newAnimTrack:Play()
+                
+                newAnimTrack:AdjustSpeed(0)
+                newAnimTrack.TimePosition = 0
+                newAnimTrack:AdjustSpeed(1)
+            end
+        end
+        
+        local humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+        humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+        
+        local function onBodyVelocityAdded(bodyVelocity)
+            if bodyVelocity:IsA("BodyVelocity") then
+                bodyVelocity.Velocity = Vector3.new(bodyVelocity.Velocity.X, 0, bodyVelocity.Velocity.Z)
+            end
+        end
+        
+        local character = game.Players.LocalPlayer.Character
+        for _, descendant in pairs(character:GetDescendants()) do
+            onBodyVelocityAdded(descendant)
+        end
+        
+        character.DescendantAdded:Connect(onBodyVelocityAdded)
+        
+        game.Players.LocalPlayer.CharacterAdded:Connect(function(newCharacter)
+            for _, descendant in pairs(newCharacter:GetDescendants()) do
+                onBodyVelocityAdded(descendant)
+            end
+            newCharacter.DescendantAdded:Connect(onBodyVelocityAdded)
+        end)
+  	end    
+})
+
+tabt:AddButton({
+	Name = "Teleport you for mountain",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(233.898254, 699.103455, 412.99469, 0.99754101, 4.18701213e-10, 0.0700853914, -2.47202869e-10, 1, -2.45566478e-09, -0.0700853914, 2.43230103e-09, 0.99754101)
+  	end    
+})
+
+tabt:AddButton({
+	Name = "Teleport you for Waterfall",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1166.53821, 816.772461, -826.889954, -0.586075187, 1.02452331e-08, 0.81025666, -5.33913855e-08, 1, -5.12635054e-08, -0.81025666, -7.33049959e-08, -0.586075187)
+  	end    
+})
+
+tabt:AddButton({
+	Name = "Teleport you in room saitama",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-58.7004738, 29.2539902, 20325.1992, -0.829434991, -2.83708648e-08, 0.558603287, -7.87738017e-08, 1, -6.61773498e-08, -0.558603287, -9.88931106e-08, -0.829434991)
+  	end    
+})
+
+tabt:AddButton({
+	Name = "Teleport you to atomic",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1064.18054, 131.434448, 23007.1855, 0.990405738, 1.04102263e-07, -0.138190165, -9.5071961e-08, 1, 7.19475892e-08, 0.138190165, -5.81192943e-08, 0.990405738)
+  	end    
+})
+
+--Завершает скрипт
+OrionLib:Init()
